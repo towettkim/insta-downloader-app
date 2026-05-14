@@ -1,6 +1,5 @@
 {
-  ".": {
-    "components": {
+  "components": {
       "instagramForm": {
         "inputs": {
           "url": {
@@ -25,7 +24,6 @@
         "hint": "Funciona con publicaciones y Reels de Instagram",
         "submit": "Descargar"
       }
-    }
   },
   "layouts": {
     "home": {
