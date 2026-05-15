@@ -22,7 +22,12 @@
           "error": "Algo salió mal, por favor intenta de nuevo."
         },
         "hint": "Funciona con publicaciones y Reels de Instagram",
-        "submit": "Descargar"
+        "submit": "Descargar",
+        "heroBar": {
+          "placeholder": "Inserta el enlace de Instagram aquí",
+          "paste": "Pegar",
+          "pasteFailed": "No se pudo leer el portapapeles"
+        }
       }
   },
   "layouts": {
@@ -51,8 +56,8 @@
       "title": "Gram Grabberz",
       "description": "Rápido, gratuito y sin necesidad de iniciar sesión. Simplemente pega la URL y descarga.",
       "hero": {
-        "title": "Descarga videos de Instagram en segundos",
-        "description": "Rápido, gratis y sin necesidad de iniciar sesión. Simplemente pega la URL y descarga.",
+        "title": "Descargador de Instagram",
+        "description": "Descarga videos, fotos, reels, IGTV y carruseles de Instagram",
         "form": {
           "placeholder": "Pega la URL del video de Instagram aquí...",
           "button": "Descargar"

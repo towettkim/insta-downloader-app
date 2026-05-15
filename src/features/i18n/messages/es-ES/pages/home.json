@@ -2,8 +2,8 @@
   "title": "Gram Grabberz",
   "description": "Rápido, gratuito y sin necesidad de iniciar sesión. Simplemente pega la URL y descarga.",
   "hero": {
-    "title": "Descarga videos de Instagram en segundos",
-    "description": "Rápido, gratis y sin necesidad de iniciar sesión. Simplemente pega la URL y descarga.",
+    "title": "Descargador de Instagram",
+    "description": "Descarga videos, fotos, reels, IGTV y carruseles de Instagram",
     "form": {
       "placeholder": "Pega la URL del video de Instagram aquí...",
       "button": "Descargar"

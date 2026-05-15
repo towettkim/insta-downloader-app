@@ -20,7 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import { Download, Loader2, X } from "lucide-react";
+import { Download, Loader2, X, ClipboardPaste } from "lucide-react";
 
 import { cn, getPostShortcode, isShortcodePresent } from "@/lib/utils";
 import { useGetInstagramPostMutation } from "@/features/react-query/mutations/instagram";
@@ -91,11 +91,16 @@ type CachedUrl = {
   };
 };
 
-export function InstagramForm(props: { className?: string }) {
+export function InstagramForm(props: {
+  className?: string;
+  /** Styling for the gradient hero: white bar, paste, blue-gradient download. */
+  variant?: "default" | "hero";
+}) {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const cachedUrls = React.useRef(new Map<string, CachedUrl>());
 
   const t = useTranslations("components.instagramForm");
+  const tBar = useTranslations("components.instagramForm.heroBar");
 
   const {
     isError,
@@ -222,67 +227,159 @@ export function InstagramForm(props: { className?: string }) {
     inputRef.current?.focus();
   }, []);
 
+  const isHero = props.variant === "hero";
+
+  async function pasteFromClipboard() {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (text?.trim()) {
+        form.setValue("url", text.trim(), {
+          shouldDirty: true,
+          shouldTouch: true,
+          shouldValidate: true,
+        });
+        await form.trigger("url");
+      }
+    } catch {
+      toast.error(tBar("pasteFailed"), {
+        position: "top-center",
+        duration: 2500,
+      });
+    }
+  }
+
   return (
     <div className={cn("w-full space-y-2", props.className)}>
       {errorMessage ? (
-        <p className="h-4 text-sm text-red-500 sm:text-start">{errorMessage}</p>
+        <p
+          className={cn(
+            "h-4 text-sm sm:text-start",
+            isHero ? "text-red-200" : "text-red-500"
+          )}
+        >
+          {errorMessage}
+        </p>
       ) : (
         <div className="h-4"></div>
       )}
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex w-full flex-col gap-2 sm:flex-row sm:items-end"
+          className={cn(
+            isHero
+              ? "flex w-full flex-col gap-3"
+              : "flex w-full flex-col gap-2 sm:flex-row sm:items-end"
+          )}
         >
-          <FormField
-            control={form.control}
-            name="url"
-            rules={{ required: true }}
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel className="sr-only">
-                  {t("inputs.url.label")}
-                </FormLabel>
-                <FormControl>
-                  <div className="relative w-full">
-                    <Input
-                      {...field}
-                      type="url"
-                      ref={inputRef}
-                      minLength={1}
-                      maxLength={255}
-                      placeholder={t("inputs.url.placeholder")}
-                    />
-                    {isShowClearButton && (
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        onClick={clearUrlField}
-                        className="absolute top-1/2 right-2 h-4 w-4 -translate-y-1/2 cursor-pointer"
-                      >
-                        <X className="text-red-500" />
-                      </Button>
-                    )}
-                  </div>
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <Button
-            disabled={isDisabled}
-            type="submit"
-            className="bg-teal-500 text-white hover:bg-teal-600 dark:bg-teal-700 dark:hover:bg-teal-600"
-          >
-            {isPending ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <Download className="h-4 w-4" />
-            )}
-            {t("submit")}
-          </Button>
+          {isHero ? (
+            <div className="flex w-full flex-col gap-2 rounded-2xl bg-white p-2 shadow-xl ring-1 ring-black/5 sm:flex-row sm:items-stretch">
+              <FormField
+                control={form.control}
+                name="url"
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <FormItem className="min-w-0 flex-1">
+                    <FormLabel className="sr-only">
+                      {t("inputs.url.label")}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        type="url"
+                        ref={inputRef}
+                        minLength={1}
+                        maxLength={255}
+                        placeholder={tBar("placeholder")}
+                        className="h-12 border-0 bg-transparent px-3 text-base text-neutral-900 shadow-none placeholder:text-neutral-400 focus-visible:ring-2 focus-visible:ring-sky-400/35 md:px-4"
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <div className="flex w-full gap-2 sm:w-auto sm:shrink-0">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => void pasteFromClipboard()}
+                  className="h-12 flex-1 gap-2 rounded-xl border-0 bg-neutral-100 font-medium text-neutral-700 shadow-none hover:bg-neutral-200 sm:flex-initial sm:px-5"
+                >
+                  <ClipboardPaste className="size-4 shrink-0 text-neutral-600" />
+                  {tBar("paste")}
+                </Button>
+                <Button
+                  disabled={isDisabled}
+                  type="submit"
+                  className="h-12 flex-1 gap-2 rounded-xl border-0 bg-gradient-to-b from-sky-400 to-blue-700 px-5 font-semibold text-white shadow-sm hover:from-sky-500 hover:to-blue-800 disabled:opacity-50 sm:flex-initial [&_svg]:text-white"
+                >
+                  {isPending ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Download className="h-4 w-4" />
+                  )}
+                  {t("submit")}
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <>
+              <FormField
+                control={form.control}
+                name="url"
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel className="sr-only">
+                      {t("inputs.url.label")}
+                    </FormLabel>
+                    <FormControl>
+                      <div className="relative w-full">
+                        <Input
+                          {...field}
+                          type="url"
+                          ref={inputRef}
+                          minLength={1}
+                          maxLength={255}
+                          placeholder={t("inputs.url.placeholder")}
+                        />
+                        {isShowClearButton && (
+                          <Button
+                            size="icon"
+                            variant="ghost"
+                            onClick={clearUrlField}
+                            className="absolute top-1/2 right-2 h-4 w-4 -translate-y-1/2 cursor-pointer"
+                          >
+                            <X className="text-red-500" />
+                          </Button>
+                        )}
+                      </div>
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <Button
+                disabled={isDisabled}
+                type="submit"
+                className="bg-teal-500 text-white hover:bg-teal-600 dark:bg-teal-700 dark:hover:bg-teal-600"
+              >
+                {isPending ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Download className="h-4 w-4" />
+                )}
+                {t("submit")}
+              </Button>
+            </>
+          )}
         </form>
       </Form>
-      <p className="text-muted-foreground text-center text-xs">{t("hint")}</p>
+      <p
+        className={cn(
+          "text-center text-xs",
+          isHero ? "text-white/85" : "text-muted-foreground"
+        )}
+      >
+        {t("hint")}
+      </p>
     </div>
   );
 }

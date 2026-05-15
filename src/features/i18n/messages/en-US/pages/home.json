@@ -2,8 +2,8 @@
   "title": "Gram Grabberz",
   "description": "Fast, free, and no login required. Just paste the URL and download.",
   "hero": {
-    "title": "Download Instagram Videos in Seconds",
-    "description": "Fast, free, and no login required. Just paste the URL and download.",
+    "title": "Instagram Downloader",
+    "description": "Download Instagram Videos, Photos, Reels, IGTV & carousel",
     "form": {
       "placeholder": "Paste Instagram video URL here...",
       "button": "Download"

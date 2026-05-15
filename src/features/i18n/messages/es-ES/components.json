@@ -21,6 +21,11 @@
       "error": "Algo salió mal, por favor intenta de nuevo."
     },
     "hint": "Funciona con publicaciones y Reels de Instagram",
-    "submit": "Descargar"
+    "submit": "Descargar",
+    "heroBar": {
+      "placeholder": "Inserta el enlace de Instagram aqu?",
+      "paste": "Pegar",
+      "pasteFailed": "No se pudo leer el portapapeles"
+    }
   }
 }

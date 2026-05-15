@@ -21,6 +21,11 @@
       "error": "Quelque chose s'est mal passé, veuillez réessayer."
     },
     "hint": "Fonctionne avec les publications et les Reels Instagram",
-    "submit": "Télécharger"
+    "submit": "Télécharger",
+    "heroBar": {
+      "placeholder": "Collez le lien Instagram ici",
+      "paste": "Coller",
+      "pasteFailed": "Impossible de lire le presse-papiers"
+    }
   }
 }

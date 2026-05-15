@@ -21,6 +21,11 @@
       "error": "Something went wrong, please try again."
     },
     "hint": "Works with Instagram posts and reels",
-    "submit": "Download"
+    "submit": "Download",
+    "heroBar": {
+      "placeholder": "Insert instagram link here",
+      "paste": "Paste",
+      "pasteFailed": "Could not read from clipboard"
+    }
   }
 }

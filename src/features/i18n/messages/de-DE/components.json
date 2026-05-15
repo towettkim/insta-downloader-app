@@ -21,6 +21,11 @@
       "error": "Etwas ist schiefgelaufen, bitte versuchen Sie es erneut."
     },
     "hint": "Funktioniert mit Instagram-Posts und Reels",
-    "submit": "Herunterladen"
+    "submit": "Herunterladen",
+    "heroBar": {
+      "placeholder": "Instagram-Link hier einfügen",
+      "paste": "Einfügen",
+      "pasteFailed": "Zwischenablage konnte nicht gelesen werden"
+    }
   }
 }

@@ -22,7 +22,12 @@
           "error": "Что-то пошло не так, попробуйте еще раз."
         },
         "hint": "Работает с постами и Reels в Instagram",
-        "submit": "Скачать"
+        "submit": "Скачать",
+        "heroBar": {
+          "placeholder": "Вставьте ссылку Instagram сюда",
+          "paste": "Вставить",
+          "pasteFailed": "Не удалось прочитать буфер обмена"
+        }
       }
   },
   "layouts": {
@@ -51,8 +56,8 @@
       "title": "Gram Grabberz",
       "description": "Быстро, бесплатно и не требует входа в систему. Просто вставьте URL-адрес и скачайте.",
       "hero": {
-        "title": "Скачивайте видео из Instagram за секунды",
-        "description": "Быстро, бесплатно и без регистрации. Просто вставьте URL и скачайте.",
+        "title": "Загрузчик Instagram",
+        "description": "Скачивайте видео, фото, Reels, IGTV и карусели из Instagram",
         "form": {
           "placeholder": "Вставьте URL видео из Instagram сюда...",
           "button": "Скачать"

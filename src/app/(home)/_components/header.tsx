@@ -39,7 +39,7 @@ export function Header() {
   }, [isMobile, open]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white backdrop-blur supports-[backdrop-filter]:bg-gray-50/60 dark:bg-gray-900/80">
+    <header className="sticky top-0 z-50 w-full border-b bg-background">
       <div className="container mx-auto flex h-16 items-center px-4">
         <div
           role="button"
